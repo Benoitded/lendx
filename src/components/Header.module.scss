@@ -1,0 +1,22 @@
+.mainHeader {
+    border-bottom: 1px solid #D4D8FF;
+    padding: 0 20px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.connectBtn {
+    border: 1px solid #D4D8FF;
+    padding: 12px 36px;
+    border-radius: 8px;
+    transition: 0.2s;
+    cursor: pointer;
+    &:hover {
+        background-color: #D4D8FF20;
+    }
+}
