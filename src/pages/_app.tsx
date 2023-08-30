@@ -3,15 +3,7 @@ import Link from "next/link";
 import Header from "@/components/header";
 import { AppProps } from 'next/app'
 
-
-import { configureChains, createConfig, WagmiConfig } from "wagmi";
-import { arbitrum, mainnet, polygon } from "wagmi/chains";
-
 import '../app/globals.css'
-
-
-const chains = [arbitrum, mainnet, polygon];
-const projectId = "6b34ee74705d197441628f5eebf2e95b";
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
