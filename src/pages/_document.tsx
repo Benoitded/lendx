@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <title>Supabasee</title>
+        <title>LendX</title>
         {/* <link rel="icon" href="/nounsLogo.png" /> */}
       </Head>
       <body>

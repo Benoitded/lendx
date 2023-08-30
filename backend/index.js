@@ -5,7 +5,7 @@ require('dotenv').config();
 const path = require('path');
 const express = require("express");
 const cors = require('cors');
-const checkAPI = require("./functions");
+const { checkAPI, getAccountTx } = require("./functions");
 
 // const { supabase, startServer } = require('./services/initServices');
 
