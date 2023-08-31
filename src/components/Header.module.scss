@@ -8,6 +8,15 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    &>*:first-child {
+        transition: 0.2s;
+        &:hover {
+            transform: translate(-2px, -2px);
+        }
+        &:active {
+            transform: translate(0px, 0px);
+        }
+    }
     svg {
         height: 25px;
         width: 100%;

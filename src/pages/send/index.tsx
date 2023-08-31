@@ -2,17 +2,26 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import React, { useState, useEffect } from "react";
 import { isInstalled, sendPayment } from "@gemwallet/api";
+import { formatDate, hexToString, stringToHex } from "../functions";
 
 export default function Home() {
-    const [amount, setAmount] = useState('');
-    const [destination, setDestination] = useState('');
+    const [amount, setAmount] = useState(null);
+    const [destination, setDestination] = useState("rN5HFmQURdbajXKTDYcTYotCn6zNWSy41");
 
     const handleSend = () => {
         isInstalled().then((response) => {
             if (response.result.isInstalled && amount !== null && destination !== null) {
                 const payment = {
-                    amount: { value: Number(amount) * 1000000, currency: 'XRP' },
+                    amount: amount * 1000000 ,
                     destination: destination,
+                    memos: [
+                        {
+                          memo: {
+                            memoData: stringToHex("Salluuuttttt"),
+                            memoType: "4465736372697074696F6E",
+                          },
+                        },
+                      ],
                 };
                 
                 sendPayment(payment  as any).then((response) => {

@@ -9,7 +9,10 @@ async function getAccountTx(address) {
                 account: address ? address : 'rN5HFmQURdbajXKTDYcTYotCn6zNWSy41',
             }, ],
         });
-        const transactions = response.data.result.transactions.map(tx => tx.tx);
+        const transactions = response.data.result.transactions
+            .filter(tx => tx.meta.TransactionResult == "tesSUCCESS")
+            .map(tx => tx.tx); // Extract the "tx" part of each transaction
+        // const transactions = response.data.result.transactions.map(tx => tx.tx);
         console.log(transactions);
         return transactions;
 
