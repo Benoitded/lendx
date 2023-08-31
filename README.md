@@ -11,7 +11,7 @@ LendX is a lending/borrowing platform built on the XRP Ledger. This document pro
 1. Clone the repository:
    `git clone <repository_url>`
 
-2. Navigate to the `lendx` directory:
+2. Navigate into the lendx directory:
    `cd lendx`
 
 3. Install dependencies:
@@ -49,5 +49,7 @@ Remember to stop both the frontend and backend servers when you're done testing.
 - Make sure to replace `<repository_url>` with the actual URL of your project's repository.
 - The default frontend port is `3000`, so make sure it's not in use.
 - For production use, additional configurations and security measures are necessary.
+- The remove button don't work cause of issues with gem wallet (EscrowCancel)
+- Some features are missed, the lending model don't work completly currently but it is planned to be **implemented soon**!
 
-Happy testing with LendX!
+**Happy testing of LendX!**
