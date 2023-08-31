@@ -49,6 +49,7 @@ body {
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(90deg, rgba(179, 174, 237, 0.20) 0%, rgba(0, 6, 23, 0.20) 100%), #0B0D18;
     color: white;
+    font-family: Inter;
 }
 
 a {
