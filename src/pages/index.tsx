@@ -1,9 +1,7 @@
 import Image from "next/image";
 import styles from "./page.module.scss";
 import { isInstalled, sendPayment, submitTransaction } from "@gemwallet/api";
-import React, { useState } from "react"; // Assurez-vous d'importer useState
-
-// });
+import React, { useState, useEffect } from "react";
 
 type Transaction = {
   Account: string;
@@ -52,6 +50,32 @@ const dataEscrows = [
   },
 ];
 
+const formatDate = (inputDate: string): string => {
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  const date = new Date(inputDate);
+  const day = date.getUTCDate();
+  const month = months[date.getUTCMonth()];
+  const year = date.getUTCFullYear();
+  const hours = (date.getUTCHours() < 10 ? "0" : "") + date.getUTCHours();
+  const minutes = (date.getUTCMinutes() < 10 ? "0" : "") + date.getUTCMinutes();
+
+  return `${day} ${month} ${year}, ${hours}:${minutes}`;
+};
+
 const release_date_unix = Math.floor(
   new Date("2023-08-31T14:53:00Z").getTime() / 1000
 );
@@ -60,6 +84,7 @@ const release_date_ripple = release_date_unix - 946684800;
 export default function Home() {
   const [amount, setAmount] = useState<number>(); // État pour gérer la valeur "amount"
   const [collateral, setCollateral] = useState<number>(); // État pour gérer la valeur "collateral"
+  const [transactionData, setTransactionData] = useState<any>(null);
 
   const handleAmountChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newAmount = parseFloat(event.target.value);
@@ -102,6 +127,28 @@ export default function Home() {
       }
     });
   };
+
+  useEffect(() => {
+    fetch(
+      "http://localhost:8000/transactions/" //rPYLcp7hsj1DbX5ERFigy1NEmJUMfhzxW3
+    )
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.error("Failed to fetch data:", response.statusText);
+        }
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(
+          "There was a problem with the fetch operation:",
+          error.message
+        );
+      });
+  }, []);
 
   return (
     <div className={styles.mainHome}>
@@ -154,7 +201,7 @@ export default function Home() {
                   <div>{e.collateral}</div>
                   <div>{e.collateral * 0.6}</div>
                   <div>{e.apy}</div>
-                  <div>{e.expiration_date}</div>
+                  <div>{formatDate(e.expiration_date)}</div>
                 </div>
               </div>
               <div className={styles.linkandborrow}>
