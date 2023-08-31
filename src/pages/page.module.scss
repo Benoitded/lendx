@@ -13,7 +13,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 40px;
+    gap: 10px;
     width: 100%;
     text-align: start;
     &>*:first-child {
@@ -21,6 +21,8 @@
         font-weight: 700;
         text-align: start;
         width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
     &>*:nth-child(2) {
         width: 100%;
@@ -56,7 +58,7 @@
     &>*:nth-child(2) {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 8px;
         input {
             width: 100%;
             height: 40px;
@@ -67,6 +69,7 @@
             padding-left: 10px;
         }
         &>*:last-child {
+            margin-top: 10px;
             display: flex;
             width: 100%;
             justify-content: space-between;
@@ -94,5 +97,18 @@
                 font-weight: 700;
             }
         }
+        .linkandborrow {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-end;
+            height: 97px;
+        }
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .mainHome {
+        flex-direction: column;
     }
 }

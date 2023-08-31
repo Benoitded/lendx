@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <title>LendX</title>
-        {/* <link rel="icon" href="/nounsLogo.png" /> */}
+        <link rel="icon" href="/logolendX.svg" />
       </Head>
       <body>
         <Main />

@@ -8,6 +8,10 @@
     position: sticky;
     top: 0;
     z-index: 100;
+    svg {
+        height: 25px;
+        width: 100%;
+    }
 }
 
 .connectBtn {
