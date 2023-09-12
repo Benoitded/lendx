@@ -94,11 +94,16 @@ export default function Home() {
       }
     });
   };
+
   const fetchTransactions = async (address: String) => {
+    const API_URL =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:3000"
+        : "YOUR_PRODUCTION_URL"; // Replace with your production URL
+
     try {
       const response = await fetch(
-        "http://localhost:8000/transactions/" +
-          (address ? address : DEFAULT_ADD)
+        `${API_URL}/api/transactions/${address || DEFAULT_ADD}`
       );
 
       if (response.ok) {
