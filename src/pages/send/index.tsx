@@ -2,7 +2,7 @@ import Image from "next/image";
 import styles from "./page.module.css";
 import React, { useState, useEffect } from "react";
 import { isInstalled, sendPayment } from "@gemwallet/api";
-import { formatDate, hexToString, stringToHex } from "../functions";
+import { formatDate, hexToString, stringToHex } from "../../library/functions";
 
 export default function Home() {
     const [amount, setAmount] = useState(0);

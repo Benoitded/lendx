@@ -6,7 +6,7 @@ import {
   getAddress,
 } from "@gemwallet/api";
 import React, { useState, useEffect } from "react";
-import { formatDate, hexToString, stringToHex } from "./functions";
+import { formatDate, hexToString, stringToHex } from "../library/functions";
 
 type Transaction = {
   Account: string;
