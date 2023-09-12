@@ -11,7 +11,7 @@ const { checkAPI } = require("./functions");
 
 const app = express();
 const port = 8000;
-const DEFAULT_ADDRESS = "rN5HFmQURdbajXKTDYcTYotCn6zNWSy41";
+const DEFAULT_ADDRESS = "r4FYvHu7KiHHTCWSAqNJ5Xb96Ci4CMcATF";
 
 
 const whitelist = ["http://localhost:3000", "http://192.168.1.64:3000", "https://lendx-rouge.vercel.app/"]

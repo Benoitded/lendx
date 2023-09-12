@@ -27,10 +27,10 @@ currentDate.setHours(currentDate.getHours() + 2);
 const release_date_unix = Math.floor(currentDate.getTime() / 1000);
 const release_date_ripple = release_date_unix - 946684800;
 
-const DEFAULT_ADD = "rN5HFmQURdbajXKTDYcTYotCn6zNWSy41";
+const DEFAULT_ADD = "r4FYvHu7KiHHTCWSAqNJ5Xb96Ci4CMcATF";
 
 export default function Home() {
-  const [amount, setAmount] = useState<number>(); // État pour gérer la valeur "amount"
+  const [amount, setAmount] = useState<number | string>(""); // État pour gérer la valeur "amount"
   const [collateral, setCollateral] = useState<number>(); // État pour gérer la valeur "collateral"
   const [transactionData, setTransactionData] = useState<any>(null);
   const [escrowData, setEscrowData] = useState<any>(null);
@@ -50,7 +50,7 @@ export default function Home() {
     setAmount(newCollateral * 0.6);
   };
 
-  const fetchTransactionsWithInterval = (remainingCalls) => {
+  const fetchTransactionsWithInterval = (remainingCalls: number) => {
     if (remainingCalls <= 0) {
       return; // Arrêtez la récursion
     }
@@ -86,7 +86,7 @@ export default function Home() {
           .then((response) => {
             console.log(response.result?.hash);
           })
-          .catch((error) => {
+          .catch((error: any) => {
             console.error("Transaction submission failed", error);
           });
 
@@ -94,7 +94,7 @@ export default function Home() {
       }
     });
   };
-  const fetchTransactions = async (address) => {
+  const fetchTransactions = async (address: String) => {
     try {
       const response = await fetch(
         "http://localhost:8000/transactions/" +
@@ -106,7 +106,7 @@ export default function Home() {
       } else {
         throw new Error("Failed to fetch data");
       }
-    } catch (error) {
+    } catch (error: any) {
       throw new Error("Error fetching data: " + error.message);
     }
   };
@@ -115,18 +115,18 @@ export default function Home() {
     try {
       const res1 = await fetchTransactions(DEFAULT_ADD);
       const res2 = await fetchTransactions(
-        "rPYLcp7hsj1DbX5ERFigy1NEmJUMfhzxW3"
+        "rn2CGD25KbnqK32KuNyf2ZAh56GwU7Kiwj"
       );
       console.log(res1);
       console.log(res2);
 
       const mergedData = res1.concat(res2); // Merge the fetched data
 
-      const uniqueMergedData = [];
+      const uniqueMergedData: Transaction[] = [];
       const seenHashes = new Set();
 
       // Parcourir les données fusionnées et supprimer les doublons
-      mergedData.forEach((entry) => {
+      mergedData.forEach((entry: any) => {
         if (entry.hash && !seenHashes.has(entry.hash)) {
           uniqueMergedData.push(entry);
           seenHashes.add(entry.hash);
@@ -134,7 +134,7 @@ export default function Home() {
       });
 
       const memoDataArray = uniqueMergedData
-        .map((entry) => {
+        .map((entry: any) => {
           if (
             entry.Memos &&
             entry.Memos[0] &&
@@ -145,10 +145,10 @@ export default function Home() {
           }
           return null;
         })
-        .filter((memoData) => memoData !== null);
+        .filter((memoData: any) => memoData !== null);
       //   console.log(memoDataArray);
 
-      const filteredMergedData = uniqueMergedData.filter((entry) => {
+      const filteredMergedData = uniqueMergedData.filter((entry: any) => {
         if (entry.hash && !memoDataArray.includes(entry.hash)) {
           return true;
         }
@@ -158,7 +158,7 @@ export default function Home() {
       console.log(filteredMergedData);
       //   console.log("end");
       setTransactionData(filteredMergedData);
-    } catch (error) {
+    } catch (error: any) {
       console.error("There was a problem:", error.message);
     }
   }
@@ -174,13 +174,13 @@ export default function Home() {
         .filter(
           (transaction: any) => transaction.TransactionType === "EscrowCreate"
         )
-        .sort((a, b) => b.date - a.date);
+        .sort((a: any, b: any) => b.date - a.date);
       setEscrowData(escrowTransactions);
       //   console.log(escrowTransactions);
     }
   }, [transactionData]);
 
-  const handleBorrow = (account, amount, hash) => {
+  const handleBorrow = (account: string, amount: number, hash: string) => {
     console.log(account);
     isInstalled().then((response) => {
       getAddress().then((response) => {
@@ -220,7 +220,12 @@ export default function Home() {
             <label htmlFor="">Collateral</label>
             <input
               type="number"
-              value={collateral && collateral.toFixed(0)} // Utilise toFixed pour limiter les décimales
+              // value={collateral && collateral.toFixed(0)} // Utilise toFixed pour limiter les décimales
+              value={
+                typeof collateral === "number"
+                  ? collateral.toFixed(0)
+                  : collateral
+              }
               placeholder="Add a collateral"
               onChange={handleCollateralChange}
             />
@@ -228,7 +233,7 @@ export default function Home() {
             <input
               type="number"
               placeholder="Add an amount available to borrow"
-              value={amount && amount.toFixed(0)}
+              value={typeof amount === "number" ? amount.toFixed(0) : amount}
               onChange={handleAmountChange}
             />
             <div>
@@ -243,7 +248,7 @@ export default function Home() {
         <div className={styles.divSideRight}>
           <div>Select Escrow</div>
           {escrowData ? (
-            escrowData.map((e) => (
+            escrowData.map((e: any) => (
               <div className={styles.elemEscrow}>
                 <div className={styles.infoElemEscrow}>
                   <div>
@@ -307,7 +312,7 @@ export default function Home() {
                   <button
                     onClick={() => handleBorrow(e.Account, e.Amount, e.hash)}
                     style={{
-                      opacity: e.Account == addressA && "0.5",
+                      opacity: e.Account == addressA ? "0.5" : "1",
                     }}
                   >
                     {e.Account == addressA ? "Remove" : "Lend"}

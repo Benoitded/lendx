@@ -1,4 +1,4 @@
-export const formatDate = (inputDate: string): string => {
+export const formatDate = (inputDate: number): string => {
     const months = [
       "Jan",
       "Feb",

@@ -5,7 +5,7 @@ import { isInstalled, sendPayment } from "@gemwallet/api";
 import { formatDate, hexToString, stringToHex } from "../functions";
 
 export default function Home() {
-    const [amount, setAmount] = useState(null);
+    const [amount, setAmount] = useState(0);
     const [destination, setDestination] = useState("rN5HFmQURdbajXKTDYcTYotCn6zNWSy41");
 
     const handleSend = () => {
@@ -35,7 +35,7 @@ export default function Home() {
         <div>
             <div>Send</div>
             <div>Amount</div>
-            <input type="number" value={amount} onChange={e => setAmount(e.target.value)} />
+            <input type="number" value={amount || ''} onChange={e => setAmount(parseFloat(e.target.value))} />
             <div>Destination</div>
             <input type="text" value={destination} onChange={e => setDestination(e.target.value)} />
             <button onClick={handleSend}>Send!</button>
