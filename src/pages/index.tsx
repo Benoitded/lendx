@@ -99,7 +99,7 @@ export default function Home() {
     const API_URL =
       process.env.NODE_ENV === "development"
         ? "http://localhost:3000"
-        : "YOUR_PRODUCTION_URL"; // Replace with your production URL
+        : "https://lendx-rouge.vercel.app/"; // Replace with your production URL
 
     try {
       const response = await fetch(
